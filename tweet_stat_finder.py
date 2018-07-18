@@ -7,14 +7,14 @@ from statsmodels.stats.multicomp import pairwise_tukeyhsd
 def main():
 
     '''
-    Takes the cleaned twitter data provided by tweet_cleaning.py for the various world leaders, and performs various
-    statistical tests comparing world leaders results to the fifth grade corpus, while also comparing world leader
-    results against one-another.
+    Takes the cleaned twitter data provided by tweet_cleaning.py for the various world leaders, evaluates the reading
+    level of the tweets, and performs statistical tests comparing the results from world leaders to results from the 
+    fifth grade corpus. Also compares the results from world leaders with each other.
     First runs a t-test with each world leader versus the fifth grade corpus, comparing on a specific test. Compared
     initially using Flesch Grade, as Flesch Readability test most universal text complexity test, but other tests can
     be checked as well.
-    Also transforms data into proper format and performs two tukey tests, one with all world leaders and fifth
-    grade corpus, and one using just the world leader data
+    Also transforms data into proper format and performs two Tukey tests: the first Tukey test with all world leaders
+    and fifth grade corpus, and the second Tukey test using just the world leader data
     '''
 
     # Pull in various required data
@@ -79,9 +79,8 @@ def main():
 
 
     '''
-    Concatenate all world leader as well as fifth grade corpus data together, to transform and perform tukey test
-    Note, due to limitations of Tukey test, datasets need to be of same size, hence the truncation of world leader
-    results to roughly half the original cardinality of their elements
+    Assembles fifth grade corpus data and data from each world leader into a single DataFrame, then performs Tukey test.
+    Note that the Tukey test requires same-size datasets, so about half the data from each world leader is left out.
     '''
     reduced_obama_fr = obama_fr[:431]
     reduced_clinton_fr = clinton_fr[:431]
